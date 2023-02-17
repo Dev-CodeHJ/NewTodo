@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -52,25 +53,17 @@ class TodoServiceTest {
         System.out.println("-- Create 테스트 시작 --");
 
         //given
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId1")
-                .title("New Title1")
-                .done(true)
-                .build();
-
-        TodoEntity entity2 = TodoEntity.builder()
-                .userId("Test UserId2")
-                .title("New Title2")
+        TodoEntity entity = TodoEntity.builder()
+                .userId("Test UserId")
+                .title("New Title")
                 .done(true)
                 .build();
 
         //when
-        TodoEntity createdEntity1 = service.create(entity1);
-        TodoEntity createdEntity2 = service.create(entity2);
+        TodoEntity createdEntity = service.create(entity);
 
         //then
-        assertEquals(createdEntity1.getTitle(), entity1.getTitle());
-        assertEquals(createdEntity2.getTitle(), entity2.getTitle());
+        assertEquals(createdEntity, entity);
     }
 
     @Test
@@ -93,16 +86,16 @@ class TodoServiceTest {
                 .build();
         repository.save(entity2);
 
+
         //when
-        List<TodoEntity> entityList = service.retrieve("Test-UserId");
+        List<TodoEntity> entityList = service.retrieve("Test UserId");
 
         //then
         assertEquals(2,entityList.size());
-
     }
 
     @Test
-    void update() {
+    void update() throws Exception {
         System.out.println("-- Update 테스트 시작 --");
 
         //given
@@ -113,19 +106,11 @@ class TodoServiceTest {
                 .build();
         repository.save(entity);
 
-        entity.setUserId("Update Id");
-        entity.setTitle("Update Title");
-        entity.setDone(false);
-
         //when
-        try {
-            String updatedEntity = service.update(entity);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String updatedEntity = service.update(entity);
 
         //then
-
+        System.out.println(updatedEntity);
     }
 
     @Test
@@ -133,13 +118,18 @@ class TodoServiceTest {
         System.out.println("-- Delete 테스트 시작 --");
 
         //given
-
+        TodoEntity entity = TodoEntity.builder()
+                .userId("Test UserId")
+                .title("New Title")
+                .done(true)
+                .build();
+        repository.save(entity);
 
         //when
-
+        String deletedEntity = service.delete(entity);
 
         //then
-
+        System.out.println(deletedEntity);
     }
     @Test
     void test() {
@@ -157,7 +147,7 @@ class TodoServiceTest {
         service.delete2(getId);
 
 
-        Assertions.assertNull(createdEntity);
+        assertNull(createdEntity);
     }
 
 }

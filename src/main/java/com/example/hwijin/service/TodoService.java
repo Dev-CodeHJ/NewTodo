@@ -29,7 +29,7 @@ public class TodoService {
         return savedEntity.getTitle();
     }
 
-    public TodoEntity create(final TodoEntity entity) {
+    public TodoEntity create(TodoEntity entity) {
         validate(entity);
 
         TodoEntity result = repository.save(entity);
@@ -68,9 +68,10 @@ public class TodoService {
         Optional<TodoEntity> findEntity = repository.findById(entity.getId());
 
         if (findEntity.isPresent()) {
-            TodoEntity result = findEntity.get();
-            repository.deleteById(result.getId());
-            return result.getId()+"가 삭제되었습니다.";
+//            TodoEntity result = findEntity.get();
+//            repository.deleteById(result.getId());
+            repository.deleteById(entity.getId());
+            return entity.getId()+"가 삭제되었습니다.";
         } else {
             throw new RuntimeException("삭제할 행이 없습니다.");
         }
