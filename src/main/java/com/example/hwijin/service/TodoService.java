@@ -29,7 +29,7 @@ public class TodoService {
         return savedEntity.getTitle();
     }
 
-    public TodoEntity create(final TodoEntity entity) {
+    public TodoEntity create(TodoEntity entity) {
         validate(entity);
 
         TodoEntity result = repository.save(entity);
@@ -39,7 +39,7 @@ public class TodoService {
         return result;
     }
 
-    public List<TodoEntity> read(String userId) {
+    public List<TodoEntity> retrieve(String userId) {
 //        log.info("USER_ID : {} .", userId);
 //        List<TodoEntity> result = repository.findByUserId(userId);
 //        log.info("Entity_COUNT = {}",result.size());

@@ -11,7 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-//import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.data.repository.query.FluentQuery;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -53,30 +53,22 @@ class TodoServiceTest {
         System.out.println("-- Create 테스트 시작 --");
 
         //given
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId1")
-                .title("New Title1")
-                .done(true)
-                .build();
-
-        TodoEntity entity2 = TodoEntity.builder()
-                .userId("Test UserId2")
-                .title("New Title2")
+        TodoEntity entity = TodoEntity.builder()
+                .userId("Test UserId")
+                .title("New Title")
                 .done(true)
                 .build();
 
         //when
-        TodoEntity createdEntity1 = service.create(entity1);
-        TodoEntity createdEntity2 = service.create(entity2);
+        TodoEntity createdEntity = service.create(entity);
 
         //then
-        assertEquals(createdEntity1.getTitle(), entity1.getTitle());
-        assertEquals(createdEntity2.getTitle(), entity2.getTitle());
+        assertEquals(createdEntity, entity);
     }
 
     @Test
     @DisplayName("Read 테스트")
-    void read() {
+    void retrieve() {
         System.out.println("-- Read 테스트 시작 --");
 
         //given
@@ -96,7 +88,7 @@ class TodoServiceTest {
 
 
         //when
-        List<TodoEntity> entityList = service.read("Test UserId");
+        List<TodoEntity> entityList = service.retrieve("Test UserId");
 
         //then
         assertEquals(2,entityList.size());
@@ -137,7 +129,6 @@ class TodoServiceTest {
         String deletedEntity = service.delete(entity);
 
         //then
-        System.out.println(entity);
         System.out.println(deletedEntity);
     }
     @Test

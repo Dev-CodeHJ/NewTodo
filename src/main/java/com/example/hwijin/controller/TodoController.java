@@ -53,9 +53,9 @@ public class TodoController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> readTodo(@PathVariable("userId") String userId) {
+    public ResponseEntity<?> retrieveTodo(@PathVariable("userId") String userId) {
         try {
-            List<TodoEntity> entities = service.read(userId);
+            List<TodoEntity> entities = service.retrieve(userId);
             List<TodoDTO> dtos = entities.stream().map(TodoDTO::new).collect(Collectors.toList());
             ResponseDTO<TodoDTO> response = ResponseDTO.<TodoDTO>builder().data(dtos).build();
 
