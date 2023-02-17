@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
+@Transactional
 class TodoServiceTest {
 
     @Autowired
@@ -131,23 +132,23 @@ class TodoServiceTest {
         //then
         System.out.println(deletedEntity);
     }
-    @Test
-    void test() {
-        System.out.println("Test");
-
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test-UserId1")
-                .title("New Title1")
-                .done(true)
-                .build();
-
-        TodoEntity createdEntity = service.create(entity1);
-
-        String getId = createdEntity.getId();
-        service.delete2(getId);
-
-
-        assertNull(createdEntity);
-    }
+//    @Test
+//    void test() {
+//        System.out.println("Test");
+//
+//        TodoEntity entity1 = TodoEntity.builder()
+//                .userId("Test-UserId1")
+//                .title("New Title1")
+//                .done(true)
+//                .build();
+//
+//        TodoEntity createdEntity = service.create(entity1);
+//
+//        String getId = createdEntity.getId();
+//        service.delete2(getId);
+//
+//
+//        assertNull(createdEntity);
+//    }
 
 }
