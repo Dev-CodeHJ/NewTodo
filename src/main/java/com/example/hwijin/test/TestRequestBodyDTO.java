@@ -1,4 +1,4 @@
-package com.example.hwijin.dto;
+package com.example.hwijin.test;
 
 
 import lombok.Data;

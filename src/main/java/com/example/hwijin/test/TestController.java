@@ -1,8 +1,7 @@
-package com.example.hwijin.controller;
+package com.example.hwijin.test;
 
 
 import com.example.hwijin.dto.ResponseDTO;
-import com.example.hwijin.dto.TestRequestBodyDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
